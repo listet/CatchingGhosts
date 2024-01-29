@@ -15,3 +15,30 @@ img {
 .d-none {
     display: none;
 }
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    margin: 10rem;
+    padding: 3rem;
+    border: 3px solid grey;
+}
+
+.container__checkbox {
+    display: flex;
+}
+
+.checkbox {
+    margin: 0.5rem;
+}
+
+.button {
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: black;
+    color: lightgrey;
+}
