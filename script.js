@@ -8,7 +8,11 @@ window.addEventListener('load', () => {
 function startGame (){
 console.log('startGame()');
 
+
+//tar bort inloggningssidan.
 document.querySelector('#formDiv').classList.add('d-none');
+
+//Vad behövs här?
 }
 
 
@@ -27,7 +31,7 @@ console.log('randomGhostPosition()');
 function hoverOverGhost (){
 console.log('hoverOverGhost()');
 
-//skapa ett dolt element.
+//skapa ett dolt element med net bilden. Göm bakom spöket.
 
 //function som använder toggle för att byta emellan bilder. Klassen hide hämtas från cssfilen.
 
@@ -40,5 +44,9 @@ console.log('hoverOverGhost()');
 
 function winGame (){
 console.log('winGame()');
+//skapa tom behållare som tar emot antal togglade bilder.
 
+//jämför antal togglade  bilder om = antal bilder så vinner man.
+
+//vinstmedellande
 }
