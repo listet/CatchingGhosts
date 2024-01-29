@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 300px;
+    aspect-ratio: 1;
+    position: absolute;
+}
+
+/* Koden ovanför är obligatorisk. Ereventuella CSS skriver ni nedanför denna kommentar */
+
+
+/*används vid toggle genom att använda klassen hide. imgContainer ID kopplas till hide klassen for att redigera ett element. Visibilty: hidden betyder att bilden finns kvar men inte syns.*/
+/*#imgContainer img.hide {
+opacity: 0;
+visibility: hidden;
+}*/
