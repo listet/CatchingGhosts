@@ -8,23 +8,39 @@ img {
     width: 300px;
     aspect-ratio: 1;
     position: absolute;
+    background-image: url(/resources/ghost.png);
+    background-image: url(/resources/net.png);
 }
 
 /* Koden ovanför är obligatorisk. Ereventuella CSS skriver ni nedanför denna kommentar */
 
-#formDiv {
+.d-none {
+    display: none;
+}
+
+.main {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-#spela {
-    background-color: green;
-    width: 100px;
-    height: 50px;
-    border-radius: 1rem;
+.form {
+    margin: 10rem;
+    padding: 3rem;
+    border: 3px solid grey;
 }
 
-body {
-    background-image: url(/resources/bakgrundbild.mp4);
-    background-position: relative;
+.container__checkbox {
+    display: flex;
+}
+
+.checkbox {
+    margin: 0.5rem;
+}
+
+.button {
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: black;
+    color: lightgrey;
 }
