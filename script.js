@@ -48,11 +48,6 @@ function initContent() {
     console.log('initContent')
     document.querySelector('#formDiv').classList.add('d-none');
 
-    /*const ghost = document.createElement("img");
-    ghost.src = "./resources/ghost.png";
-    ghost.className = "ghost";
-    document.body.appendChild(ghost);*/
-
     //variable hämtat från functionen.
     placeGhostPictures(10, 15);
 
@@ -100,64 +95,24 @@ function placeGhostPictures(min, max) {
     }
 }
 
-//niklas
-/*function initContent() {
-    console.log('success!');
-    document.querySelector('#formDiv').classList.add('d-none');
-
-    // For loop för att generera 10 stycker spöken.
-    for (let i = 0; i < 10; i++) {
-        const ghost = document.createElement("img");
-        ghost.src = "./resources/ghost.png";
-        ghost.className = "ghost";
-        ghost.style.position = "absolute";
-        ghost.style.left = ${Math.random() * window.innerWidth}px;
-        ghost.style.top = ${Math.random() * window.innerHeight}px;
-        document.body.appendChild(ghost);
-
-        ghost.addEventListener('mouseover', (event) => {
-            toggleState(event.target);
-        });
-    }
-}
-
-
-function toggleState(target) {
-    if (target.classList.contains('ghost')) {
-        target.src = './resources/ghost.png';
-        target.classList.add('net');
-        target.classList.remove('ghost');
-    } else if (target.classList.contains('net')) {
-        target.src = './resources/net.png';
-        target.classList.remove('net');
-        target.classList.add('ghost');
-    }
-}*/
-
-
-/*function startGame (){
-console.log('startGame()');
-
-
-//tar bort inloggningssidan.
-
-//Vad behövs här?
-}*/
-
-
-
-
 function checkForWin() {
     console.log('winGame()');
+
     const ghostImagesREf = document.querySelectorAll('.ghost');
     let allNetsRef = true;
 
+    //itererar över varje ghostbild
     ghostImagesREf.forEach((ghost) => {
+
+        //kollar of image src innehåller net.
         if (!ghost.src.includes('net')) {
+
+            //om någon ghost inte är ett net, blir allNetsRef satt till false.
             allNetsRef = false;
         }
     });
 
+    //om alla ghostbilder har ändrts till net har spelaren vunnit.
     if (allNetsRef) {
         console.log('Du har vunnit!');
     }
