@@ -1,7 +1,8 @@
 'use strict';
 
 window.addEventListener('load', () => {
-    initPage()
+    //Här kickar ni igång ert program
+    initPage();
 });
 
 function initPage() {
@@ -39,43 +40,93 @@ function validateLogin(event) {
         console.log(error);
         document.querySelector('#msg').textContent = error.msg;
     }
+
 }
 
 
-
 function initContent() {
-    console.log('success!');
+    console.log('initContent')
     document.querySelector('#formDiv').classList.add('d-none');
 
-    // Slumpa antalet spöken mellan 10 och 15
-    let numGhosts = Math.floor(Math.random() * 6) + 10;
+    //variable hämtat från functionen.
+    placeGhostPictures(10, 15);
 
-    // For loop för att generera ett slumpmässigt antal spöken mellan 10-15.
+}
+
+//genererar ett antal spöken mellan 10 och 15. PLacerar ut de på random plats och byter till net vid mouseover.
+function placeGhostPictures(min, max) {
+    let numGhosts = Math.floor(Math.random() * (max - min + 1)) + min;
+
     for (let i = 0; i < numGhosts; i++) {
-        const ghost = document.createElement("img");
-        ghost.src = "./resources/ghost.png";
-        ghost.className = "ghost";
-        ghost.style.position = "absolute";
-        ghost.style.left = `${Math.random() * window.innerWidth}px`;
-        ghost.style.top = `${Math.random() * window.innerHeight}px`;
+        let ghost = document.createElement('img');
+        ghost.src = './resources/ghost.png';
+        ghost.className = 'ghost';
+
+        // Beräkna spökens position relativt till fönstrets storlek
+        let leftPosition = Math.random() * (window.innerWidth - ghost.width);
+        let topPosition = Math.random() * (window.innerHeight - ghost.height);
+
+        ghost.style.position = 'absolute';
+        ghost.style.left = `${leftPosition}px`;
+        ghost.style.top = `${topPosition}px`;
+
         document.body.appendChild(ghost);
 
-        ghost.addEventListener('mouseover', (event) => {
-            toggleState(event.target);
+        ghost.addEventListener('mouseover', () => {
+            if (ghost.src.includes('ghost')) {
+                ghost.src = './resources/net.png';
+            } else {
+                ghost.src = './resources/ghost.png';
+            }
+            checkForWin();
         });
     }
 }
 
 
+function checkForWin() {
+    console.log('winGame()');
 
-function toggleState(target) {
-    if (target.classList.contains('ghost')) {
-        target.src = './resources/ghost.png';
-        target.classList.add('net');
-        target.classList.remove('ghost');
-    } else if (target.classList.contains('net')) {
-        target.src = './resources/net.png';
-        target.classList.remove('net');
-        target.classList.add('ghost');
+    let ghostImagesRef = document.querySelectorAll('.ghost');
+    let allNetsRef = true;
+
+    ghostImagesRef.forEach((ghost) => {
+        if (!ghost.src.includes('net')) {
+            allNetsRef = false;
+        }
+    });
+
+    if (allNetsRef) {
+        console.log('Du har vunnit!');
+        showWinMessage();
+        clearGameBoard();
     }
 }
+
+function clearGameBoard() {
+    let ghostImagesRef = document.querySelectorAll('.ghost');
+    ghostImagesRef.forEach((ghost) => {
+        ghost.remove(); // Ta bort varje spöke från DOM
+    });
+}
+
+function showWinMessage() {
+    let winMessage = document.createElement("div");
+    winMessage.textContent = "Grattis, du har fångat alla spöken!";
+    let restartButton = document.createElement("button");
+    restartButton.textContent = "Starta om";
+    restartButton.addEventListener('click', restartGame);
+
+    winMessage.appendChild(restartButton);
+    document.body.appendChild(winMessage);
+
+    // Dölj inloggningsformuläret
+    document.querySelector('#formDiv').classList.add('d-none');
+}
+
+function restartGame() {
+    // Ladda om sidan för att starta om spelet
+    location.reload();
+}
+
+
