@@ -11,3 +11,20 @@ img {
 }
 
 /* Koden ovanför är obligatorisk. Ereventuella CSS skriver ni nedanför denna kommentar */
+
+#formDiv {
+    display: flex;
+    justify-content: center;
+}
+
+#spela {
+    background-color: green;
+    width: 100px;
+    height: 50px;
+    border-radius: 1rem;
+}
+
+body {
+    background-image: url(/resources/bakgrundbild.mp4);
+    background-position: relative;
+}

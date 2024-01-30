@@ -1,5 +1,12 @@
 'use strict';
 
 window.addEventListener('load', () => {
-    //Här kickar ni igång ert program
+    
 });
+
+
+function initPage(){}
+
+function validateLogin() {
+
+}
