@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 50px;
+    aspect-ratio: 1;
+    position: absolute;
+}
+
+/* Koden ovanför är obligatorisk. Ereventuella CSS skriver ni nedanför denna kommentar */
+
+.d-none {
+    display: none;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: smaller;
+
+}
+
+.form {
+    margin: 10rem;
+    padding: 3rem;
+    border: 3px solid grey;
+    color: white;
+}
+
+.msg {
+    text-align: center;
+    color: red;
+}
+
+.f-col {
+    margin: 1rem;
+}
+
+.container__checkbox {
+    display: flex;
+}
+
+.checkbox {
+    margin: 0.3rem;
+}
+
+.button {
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: black;
+    color: lightgrey;
+}
+
+#videoColors {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    max-width: 2000px;
+}
+
+.winnerContainer {
+    margin: 10rem;
+    color: white;
+    font-size: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.winnerButton {
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-left: 5rem;
+}
