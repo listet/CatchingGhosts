@@ -11,10 +11,13 @@
 </head>
 
 <body>
-    <main class="main" id="main">
+    <main class="main">
+        <section class="videocontainer">
+            <video id="videoColors" src="/resources/video (1080p) (1).mp4" autoplay loop></video>
+        </section>
         <div class="form" id="formDiv">
             <form action="#" method="post">
-                <span id="msg">
+                <span class="msg" id="msg">
                 </span>
                 <div class="f-col">
                     <label for="username">Username</label>
@@ -24,7 +27,7 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" />
                 </div>
-                <div class="container__checkbox">
+                <div class=" f-col container__checkbox">
                     <label for="question">Please confirm that you are not afraid of ghosts: </label>
                     <input class="checkbox" id="question" type="checkbox">
                 </div>

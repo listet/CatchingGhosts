@@ -13,7 +13,6 @@ function initPage() {
     });
 }
 
-
 function validateLogin(event) {
     //Utföra formulärvalidering för att logga in.
     try {
@@ -23,15 +22,15 @@ function validateLogin(event) {
         let checkbox = document.querySelector('#question')
         if (!users.some(user => user.username === username.value && user.password === password.value)) {
             throw {
-                'msg': 'Fel användarnamn eller lösenord!'
+                'msg': 'Fel användarnamn eller lösenord'
             };
         } else if (!checkbox.checked) {
             throw {
-                'msg': 'Checkboxen är inte ibockad.'
+                'msg': 'Checkboxen är inte ibockad'
             };
         } else {
             console.log('success!')
-            errorMsg.innerHTML = '';
+            errorMsg.innerHTML = 'Du klarade det!';
             initContent()
         }
     } catch (error) {
@@ -41,24 +40,12 @@ function validateLogin(event) {
 
 }
 
-
 function initContent() {
     console.log('initContent')
     document.querySelector('#formDiv').classList.add('d-none');
 
     //variable hämtat från functionen.
     placeGhostPictures(10, 15);
-
-}
-
-function removeGhosts() {
-    const ghosts = document.querySelectorAll('.ghost');
-
-    // tar bort alla tidigare spöken
-    ghosts.forEach(ghost => {
-        ghost.parentNode.removeChild(ghost);
-    });
-    oGameData.capturedGhosts = 0;
 }
 
 //genererar ett antal spöken mellan 10 och 15. PLacerar ut de på random plats och byter till net vid mouseover.
@@ -120,12 +107,38 @@ function checkForWin() {
         }
     });
     //om alla ghostbilder har ändrts till net har spelaren vunnit.
+
     if (allNetsRef) {
         console.log('Du har vunnit!');
-
-        //Tar bort tidigare spöken
-        removeGhosts();
-        document.querySelector('#formDiv').classList.remove('d-none');
-        initPage()
+        showWinMessage();
+        clearGameBoard();
     }
+}
+
+function clearGameBoard() {
+    const ghostImagesRef = document.querySelectorAll('.ghost');
+    ghostImagesRef.forEach((ghost) => {
+        ghost.remove(); // Ta bort varje spöke från DOM
+    });
+}
+
+function showWinMessage() {
+    const winMessage = document.createElement("div");
+    winMessage.classList.add('winnerContainer');
+    winMessage.textContent = "Grattis, du har fångat alla spöken!";
+    const restartButton = document.createElement("button");
+    restartButton.classList.add('winnerButton');
+    restartButton.textContent = "Starta om";
+    restartButton.addEventListener('click', restartGame);
+
+    winMessage.appendChild(restartButton);
+    document.body.appendChild(winMessage);
+
+    // Dölj inloggningsformuläret
+    document.querySelector('#formDiv').classList.add('d-none');
+}
+
+function restartGame() {
+    // Ladda om sidan för att starta om spelet
+    location.reload();
 }
