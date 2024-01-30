@@ -14,7 +14,6 @@ function initPage() {
     console.log('spela')
 }
 
-
 function validateLogin(event) {
     //Utföra formulärvalidering för att logga in.
     try {
