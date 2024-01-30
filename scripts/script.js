@@ -31,20 +31,53 @@ function validateLogin(event) {
                 'msg': 'Checkboxen är inte ibockad.'
             };
         } else {
-            console.log('success!')
-            errorMsg.innerHTML = 'heeej';
             initContent()
         }
     } catch (error) {
-        console.log(error);
+        //   console.log(error);
         document.querySelector('#msg').textContent = error.msg;
     }
 }
 
-
-
 function initContent() {
-    console.log('initContent')
+    console.log('success!')
     document.querySelector('#formDiv').classList.add('d-none');
+    // Skapa spöken vid spelstart
+    const numberOfGhosts = Math.floor(Math.random() * 6) + 10;
+    for (let i = 0; i = numberOfGhosts; i++) {
+        const ghost = document.createElement("img");
+        ghost.src = "./resources/ghost.png";
+        ghost.className = "ghost";
+        ghost.style.position = "absolute";
+        document.body.appendChild(ghost);
+        // ghost.style.left = `${oGameData.left()}px`;
+        // ghost.style.top = `${oGameData.top()}px`;
+        ghost.addEventListener("mouseover", captureGhost);
+    }
 
+    function captureGhost() {
+        console.log('net')
+        this.removeEventListener("mouseover", captureGhost);
+        this.src = "./resources/net.png";
+        this.className = "net";
+        this.addEventListener("mouseover", releaseGhost);
+        oGameData.capturedGhosts++;
+
+        // if (oGameData.capturedGhosts === numberOfGhosts) {
+        //     showWinMessage();
+        // }
+    }
+
+    function releaseGhost() {
+        this.removeEventListener("mouseover", releaseGhost);
+        this.src = "./resources/ghost.png";
+        this.className = "ghost";
+        this.addEventListener("mouseover", captureGhost);
+        oGameData.capturedGhosts--;
+    }
 }
+// function showWinMessage() {
+//     const winMessage = document.getElementById("win-message");
+//     winMessage.style.display = "block";
+// }
+
