@@ -12,6 +12,22 @@ img {
 
 /* Koden ovanför är obligatorisk. Ereventuella CSS skriver ni nedanför denna kommentar */
 
+#videoColors {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    max-width: 2000px;
+}
+
+
+
+
 .d-none {
     display: none;
 }
@@ -25,7 +41,7 @@ img {
 .form {
     margin: 10rem;
     padding: 3rem;
-    border: 3px solid grey;
+    border: 3px solid rgb(0, 0, 0);
 }
 
 .container__checkbox {
