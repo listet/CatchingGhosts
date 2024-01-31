@@ -6,27 +6,27 @@ window.addEventListener('load', () => {
     playSoundOnClick();
 });
 
+//------------ljud och video--------------------------
 
 //function innehållande kod för att aktivera en backgrundsvideo och diverse ljud.
-function backgroundAudio(action){
+function backgroundAudio(action) {
     let audio = document.querySelector('.backgroundAudio');
     audio.play();
     audio.volume = 0.5;
 }
 
 //koden här gör att bakgrundsljudet spelas då det krävs att användaren gör något för att ljudet ska spelas. Detta beror på att de flesta webbläsare försöker hindra störande backgrundsljud som användaren inte valt att spela själv. Koden här aktiveras på mouseover i bodyn. Alltså ljudet börjar spelas när användaren rör på pekaren på skärmen.
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const backgroundAudio = document.getElementById('backgroundAudio');
     const bodyContent = document.getElementById('bodyContent');
 
-    // Function to play the background audio when mouse enters the main area
+
     //function som gör att backgrundsljudet spelas. volume 0.5 är 50%.
     function playBackgroundAudio() {
         backgroundAudio.volume = 0.5;
         backgroundAudio.play();
     }
 
-    // Attach event listener to play background audio on mouseover
     //kopplar en eventlistener för att vid mouseover dra igång bakgrundsljudet.
     bodyContent.addEventListener('mouseover', playBackgroundAudio);
 });
@@ -48,10 +48,17 @@ function initPage() {
 
 // Function som lyssnar efter en button click för att spela uppett ljud.
 function playSoundOnClick() {
-    const playButton = document.querySelector('.spela');
-    const audio = document.querySelector('.buttonScream');
 
+    //väljer buttonelementet med id spela.
+    const playButton = document.querySelector('#spela');
+
+    //väljer audioelementet med id buttonScream.
+    const audio = document.querySelector('#buttonScream');
+
+    //eventlistener som lyssnar efter en click.
     playButton.addEventListener('click', () => {
+
+        //När knappen är 'clicked' triggas denna function för att spela upp ett ljud.
         audio.play();
     });
 }
