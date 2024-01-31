@@ -3,8 +3,37 @@
 window.addEventListener('load', () => {
     //Här kickar ni igång ert program
     initPage();
+    playSoundOnClick();
 });
 
+
+//function innehållande kod för att aktivera en backgrundsvideo och diverse ljud.
+function backgroundAudio(action){
+    let audio = document.querySelector('.backgroundAudio');
+    audio.play();
+    audio.volume = 0.5;
+}
+
+//koden här gör att bakgrundsljudet spelas då det krävs att användaren gör något för att ljudet ska spelas. Detta beror på att de flesta webbläsare försöker hindra störande backgrundsljud som användaren inte valt att spela själv. Koden här aktiveras på mouseover i bodyn. Alltså ljudet börjar spelas när användaren rör på pekaren på skärmen.
+document.addEventListener('DOMContentLoaded', function() {
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    const bodyContent = document.getElementById('bodyContent');
+
+    // Function to play the background audio when mouse enters the main area
+    //function som gör att backgrundsljudet spelas. volume 0.5 är 50%.
+    function playBackgroundAudio() {
+        backgroundAudio.volume = 0.5;
+        backgroundAudio.play();
+    }
+
+    // Attach event listener to play background audio on mouseover
+    //kopplar en eventlistener för att vid mouseover dra igång bakgrundsljudet.
+    bodyContent.addEventListener('mouseover', playBackgroundAudio);
+});
+
+//----------------------------------------------------------------------------------------------------
+
+//Här startar sidan.
 function initPage() {
     let startBtn = document.querySelector('#spela');
     startBtn.addEventListener('click', (event) => {
@@ -12,7 +41,19 @@ function initPage() {
         validateLogin()
     });
 
-    console.log('spela')
+    playSoundOnClick();
+}
+
+
+
+// Function som lyssnar efter en button click för att spela uppett ljud.
+function playSoundOnClick() {
+    const playButton = document.querySelector('.spela');
+    const audio = document.querySelector('.buttonScream');
+
+    playButton.addEventListener('click', () => {
+        audio.play();
+    });
 }
 
 
@@ -52,6 +93,8 @@ function initContent() {
     placeGhostPictures(10, 15);
 
 }
+
+
 
 //genererar ett antal spöken mellan 10 och 15. PLacerar ut de på random plats och byter till net vid mouseover.
 function placeGhostPictures(min, max) {
@@ -95,25 +138,55 @@ function placeGhostPictures(min, max) {
     }
 }
 
+
+
 function checkForWin() {
     console.log('winGame()');
 
-    const ghostImagesREf = document.querySelectorAll('.ghost');
+    const ghostImagesRef = document.querySelectorAll('.ghost');
     let allNetsRef = true;
 
-    //itererar över varje ghostbild
-    ghostImagesREf.forEach((ghost) => {
-
-        //kollar of image src innehåller net.
+    ghostImagesRef.forEach((ghost) => {
         if (!ghost.src.includes('net')) {
-
-            //om någon ghost inte är ett net, blir allNetsRef satt till false.
             allNetsRef = false;
         }
     });
 
-    //om alla ghostbilder har ändrts till net har spelaren vunnit.
     if (allNetsRef) {
         console.log('Du har vunnit!');
+        showWinMessage();
+        clearGameBoard();
     }
+}
+
+
+
+function clearGameBoard() {
+    const ghostImagesRef = document.querySelectorAll('.ghost');
+    ghostImagesRef.forEach((ghost) => {
+        ghost.remove(); // Ta bort varje spöke från DOM
+    });
+}
+
+
+
+function showWinMessage() {
+    const winMessage = document.createElement("div");
+    winMessage.textContent = "Grattis, du har fångat alla spöken!";
+    const restartButton = document.createElement("button");
+    restartButton.textContent = "Starta om";
+    restartButton.addEventListener('click', restartGame);
+
+    winMessage.appendChild(restartButton);
+    document.body.appendChild(winMessage);
+
+    // Dölj inloggningsformuläret
+    document.querySelector('#formDiv').classList.add('d-none');
+}
+
+
+
+function restartGame() {
+    // Ladda om sidan för att starta om spelet
+    location.reload();
 }
