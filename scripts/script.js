@@ -128,5 +128,3 @@ function restartGame() {
     // Ladda om sidan för att starta om spelet
     location.reload();
 }
-
-

@@ -19,7 +19,7 @@ let oGameData = {
             left = this.net.width;
         }
         
-        return Math.round(Math.random() * ( window.innerWidth - left )) + 1;
+        return Math.round(Math.random() * ( window.innerWidth - 300 )) + 1;
     },
 
     //Metod som räknar fram och returnerar ett numeriskt värde som skall utgöra top-koordinaten (CSS) för ett img-element.
@@ -32,6 +32,6 @@ let oGameData = {
             top = this.net.height;
         }
 
-        return Math.round(Math.random() * ( window.innerHeight - top )) + 1;
+        return Math.round(Math.random() * ( window.innerHeight - 300 )) + 1;
     }
 };
