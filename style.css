@@ -41,7 +41,8 @@ img {
 .form {
     margin: 10rem;
     padding: 3rem;
-    border: 3px solid rgb(0, 0, 0);
+    border: 3px solid rgb(244, 231, 231);
+    color: rgb(241, 77, 77);
 }
 
 .container__checkbox {
@@ -55,6 +56,6 @@ img {
 .button {
     padding: 1rem;
     border-radius: 10px;
-    background-color: black;
-    color: lightgrey;
+    background-color: rgb(241, 77, 77);
+    color: rgb(244, 231, 231);
 }
