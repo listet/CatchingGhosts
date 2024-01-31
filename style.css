@@ -12,20 +12,6 @@ img {
 
 /* Koden ovanför är obligatorisk. Ereventuella CSS skriver ni nedanför denna kommentar */
 
-#videoColors {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    max-width: 2000px;
-}
-
-
 
 
 .d-none {
@@ -59,3 +45,15 @@ img {
     background-color: rgb(241, 77, 77);
     color: rgb(244, 231, 231);
 }
+
+
+
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures the video is behind other content */
+    object-fit: cover; /* Ensures the video covers the entire background */
+  }

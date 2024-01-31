@@ -1,9 +1,48 @@
 
+'use strict';
 
 window.addEventListener('load', () => {
     //Här kickar ni igång ert program
     initPage();
+    playSoundOnClick();
 });
+
+
+
+
+
+//function innehållande kod för att aktivera en backgrundsvideo och diverse ljud.
+function backgroundAudio(action) {
+    let audio = document.querySelector('.backgroundAudio');
+    audio.play();
+    audio.volume = 0.5;
+}
+
+//koden här gör att bakgrundsljudet spelas då det krävs att användaren gör något för att ljudet ska spelas. Detta beror på att de flesta webbläsare försöker hindra störande backgrundsljud som användaren inte valt att spela själv. Koden här aktiveras på mouseover i bodyn. Alltså ljudet börjar spelas när användaren rör på pekaren på skärmen.
+document.addEventListener('DOMContentLoaded', function () {
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    const bodyContent = document.getElementById('bodyContent');
+
+
+    //function som gör att backgrundsljudet spelas. volume 0.5 är 50%.
+    function playBackgroundAudio() {
+        backgroundAudio.volume = 0.5;
+        backgroundAudio.play();
+    }
+
+    //kopplar en eventlistener för att vid mouseover dra igång bakgrundsljudet.
+    bodyContent.addEventListener('mouseover', playBackgroundAudio);
+});
+
+
+
+
+
+
+
+
+
+
 
 function initPage() {
     let startBtn = document.querySelector('#spela');
@@ -102,6 +141,9 @@ function checkForWin() {
         clearGameBoard();
     }
 }
+
+
+
 
 function clearGameBoard() {
     let ghostImagesRef = document.querySelectorAll('.ghost');
