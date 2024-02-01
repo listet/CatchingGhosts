@@ -85,8 +85,12 @@ function validateLogin(event) {
             initContent()
         }
     } catch (error) {
-        console.log(error);
-        document.querySelector('#msg').textContent = error.msg;
+        if (error === undefined) {
+            console.log('Ett oförutsett fel har inträffat!');
+        } else {
+            console.log(error);
+            document.querySelector('#msg').textContent = error.msg;
+        }
     }
 
 }
