@@ -72,6 +72,8 @@ function placeGhostPictures(min, max) {
         //Kopplar ghostbilden till html bodyn.
         document.body.appendChild(ghost);
 
+        moveGhost(ghost);
+
         //Fäster en eventlistener till hovereffekten
         ghost.addEventListener('mouseover', () => {
 
@@ -82,12 +84,55 @@ function placeGhostPictures(min, max) {
                 ghost.src = './resources/net.png';
             } else {
 
-                //om nuvarande bilen är net så byts den till ghost.
+                //om nuvarande bilden är net så byts den till ghost.
                 ghost.src = './resources/ghost.png';
             }
             checkForWin();
         });
     }
+}
+
+function getRandomPosition() {
+    return Math.floor(Math.random() * window.innerWidth);
+}
+
+function moveGhost(ghost) {
+    const speed = 5;
+    let interval;
+
+    function move() {
+        const deltaX = getRandomDelta();
+        const deltaY = getRandomDelta();
+
+        const currentLeft = parseInt(ghost.style.left);
+        const currentTop = parseInt(ghost.style.top);
+
+        const newLeft = Math.max(0, Math.min(window.innerWidth - ghost.width, currentLeft + deltaX));
+        const newTop = Math.max(0, Math.min(window.innerHeight - ghost.height, currentTop + deltaY));
+
+        ghost.style.left = `${newLeft}px`;
+        ghost.style.top = `${newTop}px`;
+    }
+
+    interval = setInterval(move, 100);
+
+    ghost.addEventListener('mouseover', () => {
+        //clearInterval(interval); // Stop the interval when mouseover occurs
+
+        if (ghost.src.includes('ghost')) {
+            clearInterval(interval);
+            ghost.src = './resources/net.png';
+        } else {
+            ghost.src = './resources/ghost.png';
+            interval(interval);
+        }
+        checkForWin();
+    });
+}
+
+
+function getRandomDelta() {
+    return (Math.random() - 0.5) * 2; // Generates a random number between -1 and 1
 }
 
 function checkForWin() {
@@ -142,3 +187,6 @@ function restartGame() {
     // Ladda om sidan för att starta om spelet
     location.reload();
 }
+
+
+
