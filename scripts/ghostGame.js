@@ -5,8 +5,6 @@
 
 let oGameData = {
    
-    ghost: { width: 100, height: 100 }, // Example width and height for ghost image
-    net: { width: 100, height: 100 },   // Example width and height for net image
 
 
     //Metod som räknar fram och returnerar ett numeriskt värde som skall utgöra left-koordinaten (CSS) för ett img-element.

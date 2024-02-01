@@ -26,18 +26,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //function som gör att backgrundsljudet spelas. volume 0.5 är 50%.
     function playBackgroundAudio() {
-        backgroundAudio.volume = 0.5;
+        backgroundAudio.volume = 0.0;
         backgroundAudio.play();
     }
 
     //kopplar en eventlistener för att vid mouseover dra igång bakgrundsljudet.
     bodyContent.addEventListener('mouseover', playBackgroundAudio);
 });
-
-
-
-
-
 
 
 
@@ -101,7 +96,7 @@ function placeGhostPictures(min, max) {
         ghost.src = './resources/ghost.png';
         ghost.className = 'ghost';
 
-        // Beräkna spökens position relativt till fönstrets storlek
+        // Placera spökena slumpmässigt på sidan
         let leftPosition = Math.random() * (window.innerWidth - ghost.width);
         let topPosition = Math.random() * (window.innerHeight - ghost.height);
 
@@ -119,54 +114,86 @@ function placeGhostPictures(min, max) {
             }
             checkForWin();
         });
+
+        // Anropa funktionen för att få spökena att röra sig kontinuerligt
+        moveGhost(ghost);
     }
 }
 
+// Funktion för att få spökena att röra sig slumpmässigt på sidan
+function moveGhost(ghost) {
+    setInterval(() => {
+        let leftPosition = Math.random() * (window.innerWidth - ghost.width);
+        let topPosition = Math.random() * (window.innerHeight - ghost.height);
 
+        ghost.style.transition = 'all 4s ease-in-out';
+        ghost.style.left = `${leftPosition}px`;
+        ghost.style.top = `${topPosition}px`;
+    }, 3000); // Uppdatera spökena varannan sekund
+}
+
+
+
+// Funktionen checkForWin() kontrollerar om spelaren har vunnit genom att fånga alla spöken.
 function checkForWin() {
-    console.log('winGame()');
+    console.log('winGame()'); // Skriver ut meddelandet "winGame()" i konsolen.
 
+    // Hämta referenser till alla bilder av spöken på spelbrädet.
     let ghostImagesRef = document.querySelectorAll('.ghost');
+
+    // Variabeln som kontrollerar om alla spöken är i nätet.
     let allNetsRef = true;
 
+    // Loopa genom varje bild av spöke.
     ghostImagesRef.forEach((ghost) => {
+        // Om bilden inte innehåller 'net' i sin källa, ändra allNetsRef till false.
         if (!ghost.src.includes('net')) {
             allNetsRef = false;
         }
     });
 
+    // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
     if (allNetsRef) {
-        console.log('Du har vunnit!');
-        showWinMessage();
-        clearGameBoard();
+        console.log('Du har vunnit!'); // Skriver ut "Du har vunnit!" i konsolen.
+        showWinMessage(); // Anropa funktionen för att visa vinnarmeddelandet.
+        clearGameBoard(); // Anropa funktionen för att rensa spelbrädet.
     }
 }
 
-
-
-
+// Funktionen clearGameBoard() tar bort alla spöken från spelbrädet.
 function clearGameBoard() {
+    // Hämta referenser till alla bilder av spöken på spelbrädet.
     let ghostImagesRef = document.querySelectorAll('.ghost');
+
+    // Loopa igenom varje bild av spöke och ta bort den från DOM.
     ghostImagesRef.forEach((ghost) => {
-        ghost.remove(); // Ta bort varje spöke från DOM
+        ghost.remove(); // Ta bort varje spöke från DOM.
     });
 }
 
+// Funktionen showWinMessage() skapar och visar ett meddelande när spelaren vinner.
 function showWinMessage() {
+    // Skapa ett nytt meddelande-element.
     let winMessage = document.createElement("div");
-    winMessage.textContent = "Grattis, du har fångat alla spöken!";
+    winMessage.textContent = "Grattis, du har fångat alla spöken!"; // Texten som visas i vinnarmeddelandet.
+    
+    // Skapa en knapp för att starta om spelet.
     let restartButton = document.createElement("button");
-    restartButton.textContent = "Starta om";
-    restartButton.addEventListener('click', restartGame);
+    restartButton.textContent = "Starta om"; // Texten på starta-om-knappen.
+    restartButton.addEventListener('click', restartGame); // Lägg till en händelselyssnare för att starta om spelet när knappen klickas.
 
+    // Lägg till starta-om-knappen i vinnarmeddelandet.
     winMessage.appendChild(restartButton);
+    
+    // Lägg till vinnarmeddelandet i HTML-kroppen.
     document.body.appendChild(winMessage);
 
-    // Dölj inloggningsformuläret
+    // Dölj inloggningsformuläret genom att lägga till klassen 'd-none'.
     document.querySelector('#formDiv').classList.add('d-none');
 }
 
+// Funktionen restartGame() laddar om sidan för att starta om spelet när användaren klickar på starta-om-knappen.
 function restartGame() {
-    // Ladda om sidan för att starta om spelet
+    // Ladda om sidan för att starta om spelet.
     location.reload();
 }
