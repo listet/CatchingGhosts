@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //function som gör att backgrundsljudet spelas. volume 0.5 är 50%.
     function playBackgroundAudio() {
-        backgroundAudio.volume = 0.0;
+        backgroundAudio.volume = 0.2;
         backgroundAudio.play();
     }
 
@@ -59,22 +59,23 @@ function validateLogin(event) {
         let checkbox = document.querySelector('#question')
         if (!users.some(user => user.username === username.value && user.password === password.value)) {
             throw {
-                'msg': 'Fel användarnamn eller lösenord!'
+                'msg': 'Fel användarnamn eller lösenord'
             };
         } else if (!checkbox.checked) {
             throw {
-                'msg': 'Checkboxen är inte ibockad.'
+                'msg': 'Checkboxen är inte ibockad'
             };
         } else {
-            console.log('success!')
-            errorMsg.innerHTML = 'heeej';
             initContent()
         }
     } catch (error) {
-        console.log(error);
-        document.querySelector('#msg').textContent = error.msg;
+        if (error === undefined) {
+            console.log('Ett oförutsett fel har inträffat!');
+        } else {
+            console.log(error);
+            document.querySelector('#msg').textContent = error.msg;
+        }
     }
-
 }
 
 
@@ -173,25 +174,25 @@ function clearGameBoard() {
 
 // Funktionen showWinMessage() skapar och visar ett meddelande när spelaren vinner.
 function showWinMessage() {
-    // Skapa ett nytt meddelande-element.
-    let winMessage = document.createElement("div");
-    winMessage.textContent = "Grattis, du har fångat alla spöken!"; // Texten som visas i vinnarmeddelandet.
-    
-    // Skapa en knapp för att starta om spelet.
-    let restartButton = document.createElement("button");
-    restartButton.textContent = "Starta om"; // Texten på starta-om-knappen.
-    restartButton.addEventListener('click', restartGame); // Lägg till en händelselyssnare för att starta om spelet när knappen klickas.
+    const winMessage = document.createElement("div");
+    winMessage.classList.add('winnerContainer');
+    winMessage.textContent = "Grattis, du har fångat alla spöken!";
+    const restartButton = document.createElement("button");
+    restartButton.classList.add('winnerButton');
+    restartButton.textContent = "Starta om";
+    restartButton.addEventListener('click', restartGame);
 
-    // Lägg till starta-om-knappen i vinnarmeddelandet.
     winMessage.appendChild(restartButton);
-    
-    // Lägg till vinnarmeddelandet i HTML-kroppen.
     document.body.appendChild(winMessage);
 
-    // Dölj inloggningsformuläret genom att lägga till klassen 'd-none'.
+    // Dölj inloggningsformuläret
     document.querySelector('#formDiv').classList.add('d-none');
 }
 
+function restartGame() {
+    // Ladda om sidan för att starta om spelet
+    location.reload();
+}
 // Funktionen restartGame() laddar om sidan för att starta om spelet när användaren klickar på starta-om-knappen.
 function restartGame() {
     // Ladda om sidan för att starta om spelet.
