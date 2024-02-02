@@ -113,14 +113,20 @@ function placeGhostPictures(min, max) {
 
 // Funktion för att få spökena att röra sig slumpmässigt på sidan
 function moveGhost(ghost) {
+    let leftPosition = Math.random() * (window.innerWidth - ghost.width);
+    let topPosition = Math.random() * (window.innerHeight - ghost.height);
+
+    ghost.style.transition = 'all 4s ease-in-out';
+    ghost.style.left = `${leftPosition}px`;
+    ghost.style.top = `${topPosition}px`;
     setInterval(() => {
-        let leftPosition = Math.random() * (window.innerWidth - ghost.width);
-        let topPosition = Math.random() * (window.innerHeight - ghost.height);
+        leftPosition = Math.random() * (window.innerWidth - ghost.width);
+        topPosition = Math.random() * (window.innerHeight - ghost.height);
 
         ghost.style.transition = 'all 4s ease-in-out';
         ghost.style.left = `${leftPosition}px`;
         ghost.style.top = `${topPosition}px`;
-    }, 3000); // Uppdatera spökena varannan sekund
+    }, 3000); // Uppdatera spökena var tredje sekund
 }
 
 
