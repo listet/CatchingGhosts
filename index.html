@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>
-        Catching Ghosts
+        Catching Bats
     </title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,17 +14,14 @@
 
         
         <audio autoplay loop id="backgroundAudio">
-            <source src="./resources/horror-background-atmosphere-156462.mp3" type="audio/mpeg">
+            <source src="terror-ambience-7003.mp3" type="audio/mpeg">
         </audio>
 
         <video autoplay muted loop id="backgroundVideo">
-            <source src="./resources/pexels_videos_1725594 (720p).mp4" type="video/mp4">
+            <source src="192731 (Original).mp4" type="video/mp4">
         </video>
         
-        <audio id="buttonScream">
-            <source src="./resources/girl_scream-6465.mp3" type="audio/mpeg">
-        </audio>
-        
+
 
         <div class="form" id="formDiv">
             <form action="#" method="post">
@@ -32,23 +29,23 @@
                 </span>
                 <div class="f-col">
                     <label for="username">Username</label>
-                    <input type="text" id="username" class="input_container" />
+                    <input type="text" id="username" />
                 </div>
                 <div class="f-col">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" class="input_container"/>
+                    <input type="password" id="password" />
                 </div>
                 <div class="container__checkbox">
-                    <label for="question">I aint affraid of no ghosts!: </label>
+                    <label for="question">Please confirm that you are not afraid of ghosts: </label>
                     <input class="checkbox" id="question" type="checkbox">
                 </div>
-                <button class="button" id="spela">Spela Spookyspelet</button>
+                <button class="button" id="spela">Play Game</button>
             </form>
         </div>
     </main>
-    <script src="./users.js"></script>
-    <script src="./ghostGame.js"></script>
-    <script src="./script.js"></script>
+    <script src="./scripts/users.js"></script>
+    <script src="./scripts/ghostGame.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 
 </html>
