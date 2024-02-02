@@ -1,3 +1,4 @@
+
 'use strict';
 
 window.addEventListener('load', () => {
@@ -5,20 +6,48 @@ window.addEventListener('load', () => {
     initPage();
 });
 
+
+//function innehållande kod för att aktivera en backgrundsvideo och diverse ljud.
+function backgroundAudio(action) {
+    let audio = document.querySelector('.backgroundAudio');
+    audio.play();
+    audio.volume = 0.5;
+}
+
+//koden här gör att bakgrundsljudet spelas då det krävs att användaren gör något för att ljudet ska spelas. Detta beror på att de flesta webbläsare försöker hindra störande backgrundsljud som användaren inte valt att spela själv. Koden här aktiveras på mouseover i bodyn. Alltså ljudet börjar spelas när användaren rör på pekaren på skärmen.
+document.addEventListener('DOMContentLoaded', function () {
+    const backgroundAudio = document.getElementById('backgroundAudio');
+    const bodyContent = document.getElementById('bodyContent');
+
+
+    //function som gör att backgrundsljudet spelas. volume 0.5 är 50%.
+    function playBackgroundAudio() {
+        backgroundAudio.volume = 0.2;
+        backgroundAudio.play();
+    }
+
+    //kopplar en eventlistener för att vid mouseover dra igång bakgrundsljudet.
+    bodyContent.addEventListener('mouseover', playBackgroundAudio);
+});
+
+
+
 function initPage() {
     let startBtn = document.querySelector('#spela');
     startBtn.addEventListener('click', (event) => {
         event.preventDefault();
         validateLogin()
     });
+
+    console.log('spela')
 }
+
 
 function validateLogin(event) {
     //Utföra formulärvalidering för att logga in.
     try {
         let username = document.querySelector('#username');
         let password = document.querySelector('#password');
-        let errorMsg = document.querySelector('#msg');
         let checkbox = document.querySelector('#question')
         if (!users.some(user => user.username === username.value && user.password === password.value)) {
             throw {
@@ -29,16 +58,18 @@ function validateLogin(event) {
                 'msg': 'Checkboxen är inte ibockad'
             };
         } else {
-            console.log('success!')
-            errorMsg.innerHTML = 'Du klarade det!';
             initContent()
         }
     } catch (error) {
-        console.log(error);
-        document.querySelector('#msg').textContent = error.msg;
+        if (error === undefined) {
+            console.log('Ett oförutsett fel har inträffat!');
+        } else {
+            console.log(error);
+            document.querySelector('#msg').textContent = error.msg;
+        }
     }
-
 }
+
 
 function initContent() {
     console.log('initContent')
@@ -46,127 +77,94 @@ function initContent() {
 
     //variable hämtat från functionen.
     placeGhostPictures(10, 15);
+
 }
 
 //genererar ett antal spöken mellan 10 och 15. PLacerar ut de på random plats och byter till net vid mouseover.
 function placeGhostPictures(min, max) {
+    let numGhosts = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    //räknar antal spöken att placera ut. Min max är 10 till 15.
-    const numGhosts = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    //loop som placerar ut varje spökbild.
     for (let i = 0; i < numGhosts; i++) {
-
-        //genererar en ny img element.
-        const ghost = document.createElement('img');
-
-        //Bestämmer initialsource och klass for ghostbilden.
+        let ghost = document.createElement('img');
         ghost.src = './resources/ghost.png';
         ghost.className = 'ghost';
 
-        //bestämmer positionen av ghostbilden.
-        ghost.style.position = 'absolute';
-        ghost.style.left = `${oGameData.left()}px`; //px refererar till returnerad px från oGameData
-        ghost.style.top = `${oGameData.top()}px`;
+        // Placera spökena slumpmässigt på sidan
+        let leftPosition = Math.random() * (window.innerWidth - ghost.width);
+        let topPosition = Math.random() * (window.innerHeight - ghost.height);
 
-        //Kopplar ghostbilden till html bodyn.
+        ghost.style.position = 'absolute';
+        ghost.style.left = `${leftPosition}px`;
+        ghost.style.top = `${topPosition}px`;
+
         document.body.appendChild(ghost);
 
-        moveGhost(ghost);
-
-        //Fäster en eventlistener till hovereffekten
         ghost.addEventListener('mouseover', () => {
-
-            //kollar om den nuvarande src inkluderar ghost.
             if (ghost.src.includes('ghost')) {
-
-                //om nuvarnde bild är ghost, byt till netbilden.
                 ghost.src = './resources/net.png';
             } else {
-
-                //om nuvarande bilden är net så byts den till ghost.
                 ghost.src = './resources/ghost.png';
             }
             checkForWin();
         });
+
+        // Anropa funktionen för att få spökena att röra sig kontinuerligt
+        moveGhost(ghost);
     }
 }
 
-function getRandomPosition() {
-    return Math.floor(Math.random() * window.innerWidth);
-}
-
+// Funktion för att få spökena att röra sig slumpmässigt på sidan
 function moveGhost(ghost) {
-    const speed = 5;
-    let interval;
+    setInterval(() => {
+        let leftPosition = Math.random() * (window.innerWidth - ghost.width);
+        let topPosition = Math.random() * (window.innerHeight - ghost.height);
 
-    function move() {
-        const deltaX = getRandomDelta();
-        const deltaY = getRandomDelta();
-
-        const currentLeft = parseInt(ghost.style.left);
-        const currentTop = parseInt(ghost.style.top);
-
-        const newLeft = Math.max(0, Math.min(window.innerWidth - ghost.width, currentLeft + deltaX));
-        const newTop = Math.max(0, Math.min(window.innerHeight - ghost.height, currentTop + deltaY));
-
-        ghost.style.left = `${newLeft}px`;
-        ghost.style.top = `${newTop}px`;
-    }
-
-    interval = setInterval(move, 100);
-
-    ghost.addEventListener('mouseover', () => {
-        //clearInterval(interval); // Stop the interval when mouseover occurs
-
-        if (ghost.src.includes('ghost')) {
-            clearInterval(interval);
-            ghost.src = './resources/net.png';
-        } else {
-            ghost.src = './resources/ghost.png';
-            interval(interval);
-        }
-        checkForWin();
-    });
+        ghost.style.transition = 'all 4s ease-in-out';
+        ghost.style.left = `${leftPosition}px`;
+        ghost.style.top = `${topPosition}px`;
+    }, 3000); // Uppdatera spökena varannan sekund
 }
 
 
-function getRandomDelta() {
-    return (Math.random() - 0.5) * 2; // Generates a random number between -1 and 1
-}
 
+// Funktionen checkForWin() kontrollerar om spelaren har vunnit genom att fånga alla spöken.
 function checkForWin() {
-    console.log('winGame()');
+    console.log('winGame()'); // Skriver ut meddelandet "winGame()" i konsolen.
 
-    const ghostImagesREf = document.querySelectorAll('.ghost');
+    // Hämta referenser till alla bilder av spöken på spelbrädet.
+    let ghostImagesRef = document.querySelectorAll('.ghost');
+
+    // Variabeln som kontrollerar om alla spöken är i nätet.
     let allNetsRef = true;
 
-    //itererar över varje ghostbild
-    ghostImagesREf.forEach(ghost => {
-
-        //kollar of image src innehåller net.
+    // Loopa genom varje bild av spöke.
+    ghostImagesRef.forEach((ghost) => {
+        // Om bilden inte innehåller 'net' i sin källa, ändra allNetsRef till false.
         if (!ghost.src.includes('net')) {
-
-            //om någon ghost inte är ett net, blir allNetsRef satt till false.
             allNetsRef = false;
         }
     });
-    //om alla ghostbilder har ändrts till net har spelaren vunnit.
 
+    // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
     if (allNetsRef) {
-        console.log('Du har vunnit!');
-        showWinMessage();
-        clearGameBoard();
+        console.log('Du har vunnit!'); // Skriver ut "Du har vunnit!" i konsolen.
+        showWinMessage(); // Anropa funktionen för att visa vinnarmeddelandet.
+        clearGameBoard(); // Anropa funktionen för att rensa spelbrädet.
     }
 }
 
+// Funktionen clearGameBoard() tar bort alla spöken från spelbrädet.
 function clearGameBoard() {
-    const ghostImagesRef = document.querySelectorAll('.ghost');
+    // Hämta referenser till alla bilder av spöken på spelbrädet.
+    let ghostImagesRef = document.querySelectorAll('.ghost');
+
+    // Loopa igenom varje bild av spöke och ta bort den från DOM.
     ghostImagesRef.forEach((ghost) => {
-        ghost.remove(); // Ta bort varje spöke från DOM
+        ghost.remove(); // Ta bort varje spöke från DOM.
     });
 }
 
+// Funktionen showWinMessage() skapar och visar ett meddelande när spelaren vinner.
 function showWinMessage() {
     const winMessage = document.createElement("div");
     winMessage.classList.add('winnerContainer');
@@ -183,10 +181,8 @@ function showWinMessage() {
     document.querySelector('#formDiv').classList.add('d-none');
 }
 
+// Funktionen restartGame() laddar om sidan för att starta om spelet när användaren klickar på starta-om-knappen.
 function restartGame() {
-    // Ladda om sidan för att starta om spelet
+    // Ladda om sidan för att starta om spelet.
     location.reload();
 }
-
-
-

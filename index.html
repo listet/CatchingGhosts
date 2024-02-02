@@ -1,20 +1,24 @@
 <!doctype html>
 <html lang="sv">
 
-
 <head>
     <meta charset="utf-8" />
     <title>
         Catching Ghosts
     </title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body id="bodyContent">
     <main class="main">
-        <section class="videocontainer">
-            <video id="videoColors" src="/resources/video (1080p) (1).mp4" autoplay loop></video>
-        </section>
+
+        <audio autoplay loop id="backgroundAudio">
+            <source src="terror-ambience-7003.mp3" type="audio/mpeg">
+        </audio>
+
+        <video autoplay muted loop id="backgroundVideo">
+            <source src="192731 (Original).mp4" type="video/mp4">
+        </video>
         <div class="form" id="formDiv">
             <form action="#" method="post">
                 <span class="msg" id="msg">
@@ -27,7 +31,7 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" />
                 </div>
-                <div class=" f-col container__checkbox">
+                <div class="f-col container__checkbox">
                     <label for="question">Please confirm that you are not afraid of ghosts: </label>
                     <input class="checkbox" id="question" type="checkbox">
                 </div>
@@ -39,3 +43,5 @@
     <script src="./scripts/ghostGame.js"></script>
     <script src="./scripts/script.js"></script>
 </body>
+
+</html>
