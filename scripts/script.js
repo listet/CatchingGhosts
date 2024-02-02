@@ -70,14 +70,12 @@ function validateLogin(event) {
     }
 }
 
-
 function initContent() {
     console.log('initContent')
     document.querySelector('#formDiv').classList.add('d-none');
 
     //variable hämtat från functionen.
     placeGhostPictures(10, 15);
-
 }
 
 //genererar ett antal spöken mellan 10 och 15. PLacerar ut de på random plats och byter till net vid mouseover.
@@ -168,7 +166,7 @@ function clearGameBoard() {
 function showWinMessage() {
     const winMessage = document.createElement("div");
     winMessage.classList.add('winnerContainer');
-    winMessage.textContent = "Grattis, du har fångat alla spöken!";
+    winMessage.textContent = "Grattis, du har fångat alla fladdermöss!";
     const restartButton = document.createElement("button");
     restartButton.classList.add('winnerButton');
     restartButton.textContent = "Starta om";
