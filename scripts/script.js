@@ -32,7 +32,7 @@ function initPage() {
 }
 
 //Utföra formulärvalidering för att logga in.
-function validateLogin(event) {
+function validateLogin() {
     try {
         let username = document.querySelector('#username');
         let password = document.querySelector('#password');
