@@ -32,7 +32,7 @@ function initPage() {
 }
 
 //Utföra formulärvalidering för att logga in.
-function validateLogin(event) {
+function validateLogin() {
     try {
         let username = document.querySelector('#username');
         let password = document.querySelector('#password');
@@ -147,9 +147,8 @@ function checkForWin() {
         }
     });
 
-    // Om alla spöken är i nätet, stoppa timern, visa vinnarmeddelandet och rensa spelbrädet.
+    // Om alla spöken är i nätet visa vinnarmeddelandet och rensa spelbrädet.
     if (allNetsRef) {
-        endTime = timer;
         showWinMessage();
         clearGameBoard();
     }

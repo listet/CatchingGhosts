@@ -4,7 +4,6 @@
 /* Ni har även tillgång till metoderna top() och left() som anropas genom oGameData.top() osv. */
 
 let timer = 0;
-let endTime = 0;
 
 let oGameData = {
 
