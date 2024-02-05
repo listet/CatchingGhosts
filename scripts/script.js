@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const bodyContent = document.querySelector('#bodyContent');
 
 
+
     //function som gör att backgrundsljudet spelas. volume 0.2 är 20%.
+
 
     function playBackgroundAudio() {
         backgroundAudio.volume = 0.2;
@@ -38,8 +40,10 @@ function initPage() {
 }
 
 
+
 //Utföra formulärvalidering för att logga in.
-function validateLogin(event) {
+function validateLogin() {
+
 
     try {
         let username = document.querySelector('#username');
@@ -73,6 +77,16 @@ function initContent() {
 
     //Kallar på funktionen som placerar ut våra spöken (mellan 10 och 15 st)
     placeGhostPictures(10, 15);
+
+    //Kallar på funktionen som sätter igång timern
+    timeStarter()
+}
+
+//timern
+function timeStarter() {
+    setInterval(() => {
+        timer++;
+    }, 1000);
 }
 
 
@@ -81,7 +95,9 @@ function placeGhostPictures(min, max) {
     let numGhosts = Math.floor(Math.random() * (max - min + 1)) + min;
 
 
+
     //loop som går igenom antalet spöken och genererar bilderna.
+
 
     for (let i = 0; i < numGhosts; i++) {
         let ghost = document.createElement('img');
@@ -112,16 +128,20 @@ function placeGhostPictures(min, max) {
         });
 
 
+
         // Anropa funktionen för att få spökena att röra sig kontinuerligt
+
 
         moveGhost(ghost);
     }
 }
 
 
+
 // Funktion för att få spökena att röra sig slumpmässigt på sidan
 // Var tvungna att ha koden två gånger för att sätta igång rörelserna på direkten. 
 function moveGhost(ghost) {
+
 
     let leftPosition = Math.random() * (window.innerWidth - ghost.width);
     let topPosition = Math.random() * (window.innerHeight - ghost.height);
@@ -137,8 +157,8 @@ function moveGhost(ghost) {
         ghost.style.transition = 'all 4s ease-in-out';
         ghost.style.left = `${leftPosition}px`;
         ghost.style.top = `${topPosition}px`;
-
     }, 3000); // Uppdatera spökena var tredje sekund
+
 }
 
 // kontrollerar om spelaren har vunnit genom att fånga alla spöken.
@@ -158,10 +178,11 @@ function checkForWin() {
         }
     });
 
-    // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
-    if (allNetsRef) {
 
+    // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
+    if (allNetsRef) 
         showWinMessage();
+
 
         clearGameBoard();
     }
@@ -176,18 +197,19 @@ function clearGameBoard() {
 
     // Loopa igenom varje bild av spöke och ta bort den från DOM.
 
+
     ghostImagesRef.forEach((ghost) => {
         ghost.remove();
     });
 }
-
 
 // skapar och visar ett meddelande när spelaren vinner.
 function showWinMessage() {
     const winMessage = document.createElement("div");
     winMessage.classList.add('winnerContainer');
 
-    winMessage.textContent = "Grattis, du har fångat alla fladdermöss!";
+    winMessage.textContent = `Grattis, du har fångat alla fladdermöss! Du klarade det på ${timer} sekunder.`;
+
 
     const restartButton = document.createElement("button");
     restartButton.classList.add('winnerButton');
@@ -196,7 +218,9 @@ function showWinMessage() {
 
 
 
+
     // Kopplar inehållet till HTML-sidan
+
 
     winMessage.appendChild(restartButton);
     document.body.appendChild(winMessage);
