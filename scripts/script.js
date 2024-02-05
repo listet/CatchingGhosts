@@ -64,9 +64,11 @@ function initContent() {
 
     //Kallar på funktionen som placerar ut våra spöken (mellan 10 och 15 st)
     placeGhostPictures(10, 15);
+    //Kallar på funktionen som sätter igång timern
     timeStarter()
 }
 
+//timern
 function timeStarter() {
     setInterval(() => {
         timer++;
@@ -145,7 +147,7 @@ function checkForWin() {
         }
     });
 
-    // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
+    // Om alla spöken är i nätet, stoppa timern, visa vinnarmeddelandet och rensa spelbrädet.
     if (allNetsRef) {
         endTime = timer;
         showWinMessage();
