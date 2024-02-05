@@ -1,8 +1,6 @@
 
 # Examensgrupparbete - Catching Ghosts
 
-
-
 ## Introduktion
 Våren nalkas och det börjar bli ljusare ute. Men innan vi helt kan räkna hem våren i och med ljusets ankomst har ni, våra alldeles egna Ghostbusters, kallats in för att fånga in de sista spökena som fortfarande närs av vinterns mörka anlete.
 
@@ -41,6 +39,7 @@ Examination sker i form av ett obligatoriskt kodseminarium som kommer att hålla
 
 
 
+
 # Reflektionen ska som minst innehålla: 
 
 ## Hur har fördelningen av arbetsuppgifterna och samarbetet fungerat?
@@ -48,4 +47,5 @@ Examination sker i form av ett obligatoriskt kodseminarium som kommer att hålla
 ## Vad gruppen har gjort bra?
 
 ### Vad de skulle ha gjort annorlunda om de skulle genomföra det igen?
+
 
