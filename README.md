@@ -1,3 +1,4 @@
+
 # Examensgrupparbete - Catching Ghosts
 
 ## Introduktion
@@ -35,3 +36,16 @@ Inlämning skre senast kl 23:59, torsdagen den 8 februari på Azomo. Varje grupp
 
 ### Examination
 Examination sker i form av ett obligatoriskt kodseminarium som kommer att hållas fredagen den 9 februari via Zoom. Detta är en obligatorisk övning där ni kommer att få sitta med personer från andra grupper och diskutera, samt svara på frågor om er kod. Jag sitter med och modererar samtalet.
+
+
+
+
+# Reflektionen ska som minst innehålla: 
+
+## Hur har fördelningen av arbetsuppgifterna och samarbetet fungerat?
+
+## Vad gruppen har gjort bra?
+
+### Vad de skulle ha gjort annorlunda om de skulle genomföra det igen?
+
+

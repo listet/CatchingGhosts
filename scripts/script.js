@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //kopplar en eventlistener för att vid mouseover dra igång bakgrundsljudet.
     bodyContent.addEventListener('mouseover', playBackgroundAudio);
 });
+
 //Laddar startsidan
 function initPage() {
     let startBtn = document.querySelector('#spela');
@@ -32,7 +33,7 @@ function initPage() {
 }
 
 //Utföra formulärvalidering för att logga in.
-function validateLogin(event) {
+function validateLogin() {
     try {
         let username = document.querySelector('#username');
         let password = document.querySelector('#password');
@@ -64,14 +65,18 @@ function initContent() {
 
     //Kallar på funktionen som placerar ut våra spöken (mellan 10 och 15 st)
     placeGhostPictures(10, 15);
+
+    //Kallar på funktionen som sätter igång timern
     timeStarter()
 }
 
+//timern
 function timeStarter() {
     setInterval(() => {
         timer++;
     }, 1000);
 }
+
 
 //genererar ett antal spöken mellan 10 och 15. PLacerar ut de på random plats och byter till net vid mouseover.
 function placeGhostPictures(min, max) {
@@ -109,9 +114,11 @@ function placeGhostPictures(min, max) {
     }
 }
 
+
 // Funktion för att få spökena att röra sig slumpmässigt på sidan
-// Var tvungna att ha koden två gånger för att sätta igång rörelserna på direkten. 
+// Var tvungna att ha koden två gånger för att sätta igång rörelserna på direkten.
 function moveGhost(ghost) {
+
     let leftPosition = Math.random() * (window.innerWidth - ghost.width);
     let topPosition = Math.random() * (window.innerHeight - ghost.height);
 
@@ -147,7 +154,6 @@ function checkForWin() {
 
     // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
     if (allNetsRef) {
-        endTime = timer;
         showWinMessage();
         clearGameBoard();
     }
