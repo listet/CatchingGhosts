@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="sv">
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Catching Bats
+    </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="bodyContent">
+    <main class="main">
+        <audio autoplay loop id="backgroundAudio">
+            <source src="terror-ambience-7003.mp3" type="audio/mpeg">
+        </audio>
+        <video autoplay muted loop id="backgroundVideo">
+            <source src="192731 (Original).mp4" type="video/mp4">
+        </video>
+        <div class="form" id="formDiv">
+            <form action="#" method="post">
+                <span class="msg" id="msg">
+                </span>
+                <div class="f-col">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" />
+                </div>
+                <div class="f-col">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" />
+                </div>
+                <div class="f-col container__checkbox">
+                    <label for="question">Please confirm that you are not afraid of ghosts: </label>
+                    <input class="checkbox" id="question" type="checkbox">
+                </div>
+                <button class="button" id="spela">Play Game</button>
+            </form>
+        </div>
+    </main>
+    <script src="./scripts/users.js"></script>
+    <script src="./scripts/ghostGame.js"></script>
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>
