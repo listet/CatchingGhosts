@@ -7,13 +7,18 @@ window.addEventListener('load', () => {
 });
 
 
-//koden här gör att bakgrundsljudet spelas då det krävs att användaren gör något för att ljudet ska spelas. Detta beror på att de flesta webbläsare försöker hindra störande backgrundsljud som användaren inte valt att spela själv. Koden här aktiveras på mouseover i bodyn. Alltså ljudet börjar spelas när användaren rör på pekaren på skärmen. Dock lite buggig!
+// koden här gör att bakgrundsljudet spelas då det krävs att användaren gör något för att ljudet ska spelas. 
+// Detta beror på att de flesta webbläsare försöker hindra störande backgrundsljud som användaren inte valt att spela själv. 
+// Koden här aktiveras på mouseover i bodyn. Alltså ljudet börjar spelas när användaren rör på pekaren på skärmen.
+// Dock lite buggig. 
+
 document.addEventListener('DOMContentLoaded', function () {
     const backgroundAudio = document.querySelector('#backgroundAudio');
     const bodyContent = document.querySelector('#bodyContent');
 
 
-    //function som gör att backgrundsljudet spelas. volume 0.5 är 50%.
+    //function som gör att backgrundsljudet spelas. volume 0.2 är 20%.
+
     function playBackgroundAudio() {
         backgroundAudio.volume = 0.2;
         backgroundAudio.play();
@@ -22,9 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //kopplar en eventlistener för att vid mouseover dra igång bakgrundsljudet.
     bodyContent.addEventListener('mouseover', playBackgroundAudio);
 });
+//Laddar startsidan
 
-
-//kör igång startsidan
 function initPage() {
     let startBtn = document.querySelector('#spela');
     startBtn.addEventListener('click', (event) => {
@@ -34,8 +38,9 @@ function initPage() {
 }
 
 
+//Utföra formulärvalidering för att logga in.
 function validateLogin(event) {
-    //Utföra formulärvalidering för att logga in.
+
     try {
         let username = document.querySelector('#username');
         let password = document.querySelector('#password');
@@ -62,13 +67,12 @@ function validateLogin(event) {
 }
 
 
-//kör igång inhållet i spelet o döljer formuläret.
+//Startar innehållet och döljer formuläret
 function initContent() {
     document.querySelector('#formDiv').classList.add('d-none');
 
-    //kallar på funktionen som placerar ut ghosts.
+    //Kallar på funktionen som placerar ut våra spöken (mellan 10 och 15 st)
     placeGhostPictures(10, 15);
-
 }
 
 
@@ -76,7 +80,9 @@ function initContent() {
 function placeGhostPictures(min, max) {
     let numGhosts = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    //för varje ghost placeras de ut
+
+    //loop som går igenom antalet spöken och genererar bilderna.
+
     for (let i = 0; i < numGhosts; i++) {
         let ghost = document.createElement('img');
         ghost.src = './resources/ghost.png';
@@ -90,10 +96,12 @@ function placeGhostPictures(min, max) {
         ghost.style.left = `${leftPosition}px`;
         ghost.style.top = `${topPosition}px`;
 
-        //kopplar ghosts till html dokumentet genom att lägga till en ghost som child.
+
+        //Kopplar våra spöken till HTML-dokumentet
         document.body.appendChild(ghost);
 
-        //eventlistener som ändrar ghosts till net.
+        // Eventlistener som ändrar spöken till nät (och tvärt om) + kallar funktionen som kontrollerar vinst
+
         ghost.addEventListener('mouseover', () => {
             if (ghost.src.includes('ghost')) {
                 ghost.src = './resources/net.png';
@@ -103,15 +111,18 @@ function placeGhostPictures(min, max) {
             checkForWin();
         });
 
-        // Anropa funktionen för att få fladdermöss att röra sig kontinuerligt
+
+        // Anropa funktionen för att få spökena att röra sig kontinuerligt
+
         moveGhost(ghost);
     }
 }
 
 
-// Funktion för att få fladdermöss att röra sig slumpmässigt på sidan
+// Funktion för att få spökena att röra sig slumpmässigt på sidan
+// Var tvungna att ha koden två gånger för att sätta igång rörelserna på direkten. 
 function moveGhost(ghost) {
-    //här sätts rörelsen igång direkt för att sedan styras av interval.
+
     let leftPosition = Math.random() * (window.innerWidth - ghost.width);
     let topPosition = Math.random() * (window.innerHeight - ghost.height);
 
@@ -126,12 +137,14 @@ function moveGhost(ghost) {
         ghost.style.transition = 'all 4s ease-in-out';
         ghost.style.left = `${leftPosition}px`;
         ghost.style.top = `${topPosition}px`;
-    }, 3000); // Uppdatera fladdermöss varannan sekund
+
+    }, 3000); // Uppdatera spökena var tredje sekund
 }
 
-
-// Funktionen checkForWin() kontrollerar om spelaren har vunnit genom att fånga alla spöken.
+// kontrollerar om spelaren har vunnit genom att fånga alla spöken.
 function checkForWin() {
+    // Hämta referenser till alla bilder av spöken på spelbrädet.
+
     let ghostImagesRef = document.querySelectorAll('.ghost');
 
     // Variabeln som kontrollerar om alla spöken är i nätet.
@@ -147,7 +160,9 @@ function checkForWin() {
 
     // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
     if (allNetsRef) {
-        showWinMessage(); 
+
+        showWinMessage();
+
         clearGameBoard();
     }
 }
@@ -157,7 +172,10 @@ function checkForWin() {
 function clearGameBoard() {
     let ghostImagesRef = document.querySelectorAll('.ghost');
 
-    // Loopa igenom varje bild av spöke och ta bort den från DOM'n.
+
+
+    // Loopa igenom varje bild av spöke och ta bort den från DOM.
+
     ghostImagesRef.forEach((ghost) => {
         ghost.remove();
     });
@@ -168,12 +186,17 @@ function clearGameBoard() {
 function showWinMessage() {
     const winMessage = document.createElement("div");
     winMessage.classList.add('winnerContainer');
-    winMessage.textContent = "Grattis, du har fångat alla fladermöss!";
+
+    winMessage.textContent = "Grattis, du har fångat alla fladdermöss!";
 
     const restartButton = document.createElement("button");
     restartButton.classList.add('winnerButton');
     restartButton.textContent = "Starta om";
     restartButton.addEventListener('click', restartGame);
+
+
+
+    // Kopplar inehållet till HTML-sidan
 
     winMessage.appendChild(restartButton);
     document.body.appendChild(winMessage);

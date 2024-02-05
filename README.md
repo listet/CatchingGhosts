@@ -1,7 +1,6 @@
+
 # Examensgrupparbete - Catching Ghosts
 
-
-=======
 ## Introduktion
 Våren nalkas och det börjar bli ljusare ute. Men innan vi helt kan räkna hem våren i och med ljusets ankomst har ni, våra alldeles egna Ghostbusters, kallats in för att fånga in de sista spökena som fortfarande närs av vinterns mörka anlete.
 
@@ -37,4 +36,16 @@ Inlämning skre senast kl 23:59, torsdagen den 8 februari på Azomo. Varje grupp
 
 ### Examination
 Examination sker i form av ett obligatoriskt kodseminarium som kommer att hållas fredagen den 9 februari via Zoom. Detta är en obligatorisk övning där ni kommer att få sitta med personer från andra grupper och diskutera, samt svara på frågor om er kod. Jag sitter med och modererar samtalet.
->>>>>>> 56ad2fbc6207fb377c4544fe3b377b72a43cc79a
+
+
+
+
+# Reflektionen ska som minst innehålla: 
+
+## Hur har fördelningen av arbetsuppgifterna och samarbetet fungerat?
+
+## Vad gruppen har gjort bra?
+
+### Vad de skulle ha gjort annorlunda om de skulle genomföra det igen?
+
+
