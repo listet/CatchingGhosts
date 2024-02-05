@@ -64,6 +64,13 @@ function initContent() {
 
     //Kallar på funktionen som placerar ut våra spöken (mellan 10 och 15 st)
     placeGhostPictures(10, 15);
+    timeStarter()
+}
+
+function timeStarter() {
+    setInterval(() => {
+        timer++;
+    }, 1000);
 }
 
 //genererar ett antal spöken mellan 10 och 15. PLacerar ut de på random plats och byter till net vid mouseover.
@@ -119,6 +126,7 @@ function moveGhost(ghost) {
         ghost.style.left = `${leftPosition}px`;
         ghost.style.top = `${topPosition}px`;
     }, 3000); // Uppdatera spökena var tredje sekund
+
 }
 
 // kontrollerar om spelaren har vunnit genom att fånga alla spöken.
@@ -139,6 +147,7 @@ function checkForWin() {
 
     // Om alla spöken är i nätet, visa vinnarmeddelandet och rensa spelbrädet.
     if (allNetsRef) {
+        endTime = timer;
         showWinMessage();
         clearGameBoard();
     }
@@ -158,7 +167,7 @@ function clearGameBoard() {
 function showWinMessage() {
     const winMessage = document.createElement("div");
     winMessage.classList.add('winnerContainer');
-    winMessage.textContent = "Grattis, du har fångat alla fladdermöss!";
+    winMessage.textContent = `Grattis, du har fångat alla fladdermöss! Du klarade det på ${timer} sekunder.`;
     const restartButton = document.createElement("button");
     restartButton.classList.add('winnerButton');
     restartButton.textContent = "Starta om";
